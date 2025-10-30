@@ -1,9 +1,9 @@
 package stream.flatMap;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class Student{
     String sname;
@@ -55,8 +55,14 @@ public class flatMapDemo3 {
         System.out.println("After converting Upper case: " + stuNameUpperCase);
         // After converting Upper case: [SMITH, JOHN, SMITH, SCOTT, MARY, KITTY]
 
+        //Using Stream
+        List<String> stuName1 = allStudentList.stream().flatMap(stuList->stuList.stream().map(s->s.sname)).collect(Collectors.toList());
+        System.out.println("Normal name  using stream: "  + stuName1);
+        //Normal name  using stream: [Smith, John, Smith, Scott, Mary, Kitty]
 
-
+        List<String> stuNameUpper = stuName1.stream().map(s->s.toUpperCase()).collect(Collectors.toList());
+        System.out.println("After converting Upper case using stream: " + stuNameUpper);
+        //After converting Upper case using stream: [SMITH, JOHN, SMITH, SCOTT, MARY, KITTY]
 
 
     }
